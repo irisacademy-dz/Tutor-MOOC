@@ -86,6 +86,21 @@
             color: #666;
             font-size: 0.95rem;
         }
+
+        .module-link {
+            text-decoration: none;
+            color: var(--dark);
+            display: block;
+            padding: 1rem;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            transition: background-color 0.2s;
+        }
+
+        .module-link:hover {
+            background-color: #f0f0f0;
+        }
         
         .locked {
             opacity: 0.6;
@@ -186,7 +201,6 @@
     </style>
 </head>
 <body>
-    <!-- Access Modal -->
     <div id="accessModal" class="modal">
         <div class="modal-content">
             <h2>Welcome to IRIS Tutor Academy</h2>
@@ -197,7 +211,6 @@
         </div>
     </div>
 
-    <!-- Main Content (hidden until access granted) -->
     <div id="content" style="display:none;">
         <header>
             <h1>IRIS Tutor Academy</h1>
@@ -219,25 +232,25 @@
             <section class="course-section">
                 <h2>Course Modules</h2>
                 
-                <div class="module">
-                    <div class="module-title">Module 1: [Title]</div>
-                    <div class="module-desc">[Brief description of Module 1 content and objectives]</div>
-                </div>
+                <a href="module1.html" class="module-link">
+                    <div class="module-title">Module 1: The Insight Pillar</div>
+                    <div class="module-desc">Understand how to gain deeper insights into your students' learning styles and needs.</div>
+                </a>
                 
-                <div class="module">
-                    <div class="module-title">Module 2: [Title]</div>
-                    <div class="module-desc">[Brief description of Module 2 content and objectives]</div>
-                </div>
+                <a href="module2.html" class="module-link">
+                    <div class="module-title">Module 2: The Reflection Pillar</div>
+                    <div class="module-desc">Learn to reflect on your tutoring practices for continuous improvement.</div>
+                </a>
                 
-                <div class="module">
-                    <div class="module-title">Module 3: [Title]</div>
-                    <div class="module-desc">[Brief description of Module 3 content and objectives]</div>
-                </div>
+                <a href="module3.html" class="module-link">
+                    <div class="module-title">Module 3: The Innovation Pillar</div>
+                    <div class="module-desc">Discover innovative strategies to enhance engagement and comprehension.</div>
+                </a>
                 
-                <div class="module">
-                    <div class="module-title">Module 4: [Title]</div>
-                    <div class="module-desc">[Brief description of Module 4 content and objectives]</div>
-                </div>
+                <a href="module4.html" class="module-link">
+                    <div class="module-title">Module 4: The Strategy Pillar</div>
+                    <div class="module-desc">Develop effective tutoring strategies tailored to individual student goals.</div>
+                </a>
             </section>
             
             <section class="course-section">
@@ -267,7 +280,12 @@
         
         // Show modal on load
         window.onload = function() {
-            modal.style.display = 'flex';
+            if(sessionStorage.getItem('irisAccess') !== 'granted') {
+                modal.style.display = 'flex';
+            } else {
+                // If access is granted, directly display content
+                content.style.display = 'block';
+            }
         };
         
         // Check access code
@@ -282,12 +300,6 @@
                 accessInput.value = '';
             }
         });
-        
-        // Check if already accessed in this session
-        if(sessionStorage.getItem('irisAccess') === 'granted') {
-            modal.style.display = 'none';
-            content.style.display = 'block';
-        }
         
         // Allow Enter key to submit
         accessInput.addEventListener('keypress', function(e) {
