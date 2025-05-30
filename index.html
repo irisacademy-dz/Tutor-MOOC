@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IRIS Tutor Academy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>IRIS Learning Hub - Online Courses Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #5D3FD3; /* Iris purple */
@@ -13,7 +14,19 @@
             --light: #F8F9FA;
             --dark: #212529;
             --success: #28A745;
+            --danger: #DC3545;
+            --warning: #FFC107;
+            --info: #17A2B8;
             --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
         body {
@@ -23,24 +36,113 @@
             background-color: #f5f7ff;
             margin: 0;
             padding: 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
         }
         
-        header {
-            text-align: center;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
+        /* Header/Navigation */
+        .navbar {
+            background: white;
+            box-shadow: var(--shadow-md);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .user-menu .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(93, 63, 211, 0.1);
+        }
+        
+        .btn-primary {
             background: var(--gradient);
-            border-radius: 12px;
             color: white;
-            box-shadow: 0 10px 20px rgba(93, 63, 211, 0.2);
+            border: none;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        header::before {
+        .hero::before {
             content: "";
             position: absolute;
             top: -50%;
@@ -51,423 +153,900 @@
             transform: rotate(30deg);
         }
         
-        h1 {
-            color: white;
-            font-weight: 600;
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .tagline {
-            font-size: 1.3rem;
-            color: rgba(255,255,255,0.9);
-            font-weight: 300;
-            max-width: 700px;
+        .hero-content {
+            max-width: 800px;
             margin: 0 auto;
             position: relative;
         }
         
-        .course-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
         }
         
-        .course-section {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(93, 63, 211, 0.1);
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
         
-        .course-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(93, 63, 211, 0.15);
-        }
-        
-        h2 {
-            color: var(--primary);
-            font-weight: 500;
-            border-bottom: 2px solid rgba(93, 63, 211, 0.1);
-            padding-bottom: 0.8rem;
-            margin-top: 0;
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        h2::before {
-            content: "";
-            display: inline-block;
-            width: 8px;
-            height: 25px;
-            background: var(--gradient);
-            margin-right: 15px;
-            border-radius: 4px;
-        }
-        
-        .module {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: rgba(245, 247, 255, 0.5);
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s ease;
-        }
-        
-        .module:hover {
-            background: rgba(245, 247, 255, 0.8);
-            transform: translateX(5px);
-        }
-        
-        .module-title {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .module-title::before {
-            content: "•";
-            color: var(--secondary);
-            font-size: 2rem;
-            margin-right: 10px;
-            line-height: 0;
-        }
-        
-        .module-desc {
-            color: #555;
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-        
-        .locked {
-            opacity: 0.6;
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
             position: relative;
         }
         
-        .locked:after {
-            content: "🔒";
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            box-shadow: var(--shadow-lg);
+            padding-right: 50px;
+        }
+        
+        .search-bar button {
             position: absolute;
-            right: 15px;
-            top: 15px;
-            font-size: 1.2rem;
-        }
-        
-        .video-container {
-            margin: 2rem 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .quiz-btn {
+            right: 5px;
+            top: 5px;
             background: var(--gradient);
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 1rem;
-            font-weight: 500;
-            box-shadow: 0 4px 6px rgba(93, 63, 211, 0.2);
-            display: inline-flex;
-            align-items: center;
         }
         
-        .quiz-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 7px 14px rgba(93, 63, 211, 0.3);
-        }
-        
-        .quiz-btn:active {
-            transform: translateY(0);
-        }
-        
-        .certificate-notice {
-            background: rgba(40, 167, 69, 0.1);
-            border-left: 4px solid var(--success);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            font-style: italic;
-            border-radius: 0 8px 8px 0;
-            color: #155724;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 4rem;
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 2rem;
-            color: #666;
-            font-size: 0.9rem;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        /* Access modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title i {
+            font-size: 1.5rem;
+        }
+        
+        /* Course Grid */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .course-image {
+            height: 180px;
+            background: var(--primary-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-image img {
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
+            object-fit: cover;
         }
         
-        .modal-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 12px;
-            max-width: 450px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .modal-content::before {
-            content: "";
+        .course-badge {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
-        }
-        
-        .modal-content h2 {
-            color: var(--primary);
-            border: none;
-            padding: 0;
-            justify-content: center;
-        }
-        
-        .modal-content h2::before {
-            display: none;
-        }
-        
-        .access-input {
-            width: 100%;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border: 2px solid #eee;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .access-input:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(93, 63, 211, 0.2);
-        }
-        
-        .submit-btn {
-            background: var(--gradient);
+            top: 10px;
+            left: 10px;
+            background: var(--success);
             color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
             font-weight: 500;
-            box-shadow: 0 4px 6px rgba(93, 63, 211, 0.2);
-            width: 100%;
         }
         
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 7px 14px rgba(93, 63, 211, 0.3);
+        .course-content {
+            padding: 1.5rem;
         }
         
-        .error-msg {
-            color: #dc3545;
-            margin-top: 1.5rem;
-            display: none;
-            background: rgba(220, 53, 69, 0.1);
-            padding: 0.8rem;
-            border-radius: 4px;
+        .course-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
         
-        /* Progress indicator */
-        .progress-container {
+        .course-instructor {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--warning);
+        }
+        
+        .course-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .course-progress {
             width: 100%;
             height: 6px;
             background: #eee;
             border-radius: 3px;
-            margin: 2rem 0;
-            overflow: hidden;
+            margin-bottom: 0.5rem;
         }
         
         .progress-bar {
             height: 100%;
-            width: 25%;
-            background: var(--gradient);
             border-radius: 3px;
-            transition: width 0.4s ease;
+            background: var(--gradient);
+            width: 30%;
         }
         
-        /* Module completion checkmark */
-        .completed {
+        /* Learning Path */
+        .learning-path {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 3rem;
+        }
+        
+        .path-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .path-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .path-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .modules-list {
+            margin-top: 2rem;
+        }
+        
+        .module-item {
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
             position: relative;
         }
         
-        .completed::after {
-            content: "✓";
-            position: absolute;
-            right: 15px;
-            top: 15px;
+        .module-item:hover {
+            border-color: var(--primary-light);
+            background: rgba(93, 63, 211, 0.03);
+        }
+        
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+        
+        .module-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .module-status {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+        }
+        
+        .completed .module-status {
+            background: var(--success);
+            border-color: var(--success);
+        }
+        
+        .in-progress .module-status {
+            background: var(--warning);
+            border-color: var(--warning);
+        }
+        
+        .module-content {
+            display: none;
+            padding-top: 1rem;
+        }
+        
+        .module-item.active .module-content {
+            display: block;
+        }
+        
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+        
+        .lesson-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(93, 63, 211, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .completed .lesson-icon {
+            background: rgba(40, 167, 69, 0.1);
             color: var(--success);
-            font-weight: bold;
+        }
+        
+        .lesson-duration {
+            margin-left: auto;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        /* Instructor Section */
+        .instructor-section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 3rem;
+        }
+        
+        .instructor-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .instructor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-light);
+        }
+        
+        .instructor-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .instructor-title {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .instructor-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--warning);
+        }
+        
+        .instructor-bio {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        /* Reviews Section */
+        .reviews-section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .review-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .review-item:last-child {
+            border-bottom: none;
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .reviewer-info h4 {
+            margin-bottom: 0.3rem;
+        }
+        
+        .review-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .review-rating {
+            color: var(--warning);
+        }
+        
+        .review-content {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h3 {
             font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .path-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .path-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Access Modal -->
-    <div id="accessModal" class="modal">
-        <div class="modal-content">
-            <h2>Welcome to IRIS Tutor Academy</h2>
-            <p>Please enter your access code to continue:</p>
-            <input type="password" id="accessCode" class="access-input" placeholder="Enter access code">
-            <button id="submitCode" class="submit-btn">Submit</button>
-            <p id="errorMsg" class="error-msg">Incorrect access code. Please try again.</p>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://via.placeholder.com/40x40" alt="IRIS Logo">
+            <span class="logo-text">IRIS Learning Hub</span>
         </div>
-    </div>
-
-    <!-- Main Content (hidden until access granted) -->
-    <div id="content" style="display:none;">
-        <header>
-            <h1>IRIS Tutor Academy</h1>
-            <p class="tagline">Elevating tutoring through insight, reflection, innovation, and strategy</p>
-        </header>
-        
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">Learning Paths</a>
+            <a href="#">For Business</a>
+            <a href="#">About</a>
         </div>
-        
-        <div class="course-container">
-            <section class="course-section">
-                <h2>Introduction</h2>
-                <p>Welcome to the IRIS Tutor Academy. This course will transform your approach to tutoring through our four foundational pillars.</p>
-                
-                <div class="video-container">
-                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1088956014?h=d13f8a4972&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Introduction IRIS Training course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+        <div class="user-menu">
+            <button class="btn btn-outline">Log In</button>
+            <button class="btn btn-primary">Sign Up</button>
+            <div class="user-avatar">JS</div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Advance Your Tutoring Career</h1>
+            <p>Master the art of effective tutoring with our expert-led courses. Join thousands of educators transforming their teaching approach.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="What do you want to learn today?">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Featured Courses -->
+        <h2 class="section-title"><i class="fas fa-star"></i> Featured Courses</h2>
+        <div class="course-grid">
+            <div class="course-card">
+                <div class="course-image">
+                    <img src="https://via.placeholder.com/400x200" alt="Course Image">
+                    <div class="course-badge">Bestseller</div>
                 </div>
-                
-                <p>By completing this course, you'll gain the tools to create meaningful learning experiences for your students.</p>
-            </section>
+                <div class="course-content">
+                    <h3 class="course-title">Foundations of Effective Tutoring</h3>
+                    <p class="course-instructor">Dr. Sarah Johnson</p>
+                    <div class="course-meta">
+                        <div class="course-rating">
+                            <i class="fas fa-star"></i> 4.8 (1,245)
+                        </div>
+                        <div class="course-price">$49.99</div>
+                    </div>
+                    <div class="course-footer">
+                        <div>
+                            <div class="course-progress">
+                                <div class="progress-bar" style="width: 65%;"></div>
+                            </div>
+                            <span>65% complete</span>
+                        </div>
+                        <button class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Continue</button>
+                    </div>
+                </div>
+            </div>
             
-            <section class="course-section">
-                <h2>Course Modules</h2>
-                
-                <div class="module">
-                    <div class="module-title">Module 1: Foundations of Effective Tutoring</div>
-                    <div class="module-desc">Learn the core principles that form the foundation of successful tutoring relationships and strategies.</div>
-                    <div class="video-container" style="margin-top: 1.5rem;">
-                        <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1088982135?h=c6c0e53fa7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Module 01"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+            <div class="course-card">
+                <div class="course-image">
+                    <img src="https://via.placeholder.com/400x200" alt="Course Image">
+                    <div class="course-badge">New</div>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Advanced Tutoring Techniques</h3>
+                    <p class="course-instructor">Prof. Michael Chen</p>
+                    <div class="course-meta">
+                        <div class="course-rating">
+                            <i class="fas fa-star"></i> 4.7 (892)
+                        </div>
+                        <div class="course-price">$59.99</div>
+                    </div>
+                    <div class="course-footer">
+                        <button class="btn-primary" style="width: 100%; padding: 0.8rem; font-size: 0.9rem;">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="course-card">
+                <div class="course-image">
+                    <img src="https://via.placeholder.com/400x200" alt="Course Image">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Student Assessment Strategies</h3>
+                    <p class="course-instructor">Dr. Emily Wilson</p>
+                    <div class="course-meta">
+                        <div class="course-rating">
+                            <i class="fas fa-star"></i> 4.9 (1,532)
+                        </div>
+                        <div class="course-price">$54.99</div>
+                    </div>
+                    <div class="course-footer">
+                        <button class="btn-primary" style="width: 100%; padding: 0.8rem; font-size: 0.9rem;">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Learning Path -->
+        <div class="learning-path">
+            <div class="path-header">
+                <h2 class="path-title">IRIS Tutor Certification Program</h2>
+                <div class="path-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Courses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">32</div>
+                        <div class="stat-label">Hours</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Completion</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modules-list">
+                <div class="module-item completed active">
+                    <div class="module-header">
+                        <div class="module-title">
+                            <div class="module-status"><i class="fas fa-check"></i></div>
+                            Module 1: Foundations of Effective Tutoring
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <div class="lesson-item completed">
+                            <div class="lesson-icon"><i class="fas fa-check"></i></div>
+                            <div class="lesson-title">Introduction to Tutoring Principles</div>
+                            <div class="lesson-duration">12 min</div>
+                        </div>
+                        <div class="lesson-item completed">
+                            <div class="lesson-icon"><i class="fas fa-check"></i></div>
+                            <div class="lesson-title">Building Student Relationships</div>
+                            <div class="lesson-duration">18 min</div>
+                        </div>
+                        <div class="lesson-item completed">
+                            <div class="lesson-icon"><i class="fas fa-check"></i></div>
+                            <div class="lesson-title">Effective Communication Techniques</div>
+                            <div class="lesson-duration">22 min</div>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-icon"><i class="fas fa-play-circle"></i></div>
+                            <div class="lesson-title">Module 1 Quiz</div>
+                            <div class="lesson-duration">15 min</div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="module locked">
-                    <div class="module-title">Module 2: Advanced Tutoring Techniques</div>
-                    <div class="module-desc">Explore advanced methods to enhance student engagement and improve learning outcomes.</div>
+                <div class="module-item in-progress">
+                    <div class="module-header">
+                        <div class="module-title">
+                            <div class="module-status">2</div>
+                            Module 2: Advanced Tutoring Techniques
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="module-content">
+                        <div class="lesson-item completed">
+                            <div class="lesson-icon"><i class="fas fa-check"></i></div>
+                            <div class="lesson-title">Engagement Strategies</div>
+                            <div class="lesson-duration">15 min</div>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-icon"><i class="fas fa-play-circle"></i></div>
+                            <div class="lesson-title">Differentiated Instruction</div>
+                            <div class="lesson-duration">20 min</div>
+                        </div>
+                        <div class="lesson-item">
+                            <div class="lesson-icon"><i class="fas fa-lock"></i></div>
+                            <div class="lesson-title">Technology in Tutoring</div>
+                            <div class="lesson-duration">25 min</div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="module locked">
-                    <div class="module-title">Module 3: Student Assessment Strategies</div>
-                    <div class="module-desc">Master techniques for assessing student progress and adapting your tutoring approach.</div>
+                <div class="module-item">
+                    <div class="module-header">
+                        <div class="module-title">
+                            <div class="module-status">3</div>
+                            Module 3: Student Assessment Strategies
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                 </div>
                 
-                <div class="module locked">
-                    <div class="module-title">Module 4: Building Long-term Success</div>
-                    <div class="module-desc">Develop strategies for creating lasting impact and fostering independent learning skills.</div>
+                <div class="module-item">
+                    <div class="module-header">
+                        <div class="module-title">
+                            <div class="module-status">4</div>
+                            Module 4: Building Long-term Success
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                 </div>
-            </section>
-            
-            <section class="course-section locked">
-                <h2>Final Assessment</h2>
-                <p>Test your knowledge after completing all modules with our comprehensive quiz.</p>
-                <button class="quiz-btn locked">Take Final Quiz</button>
-                
-                <div class="certificate-notice">
-                    Upon successful completion of the quiz, you'll receive a certificate acknowledging your achievement.
-                </div>
-            </section>
+            </div>
         </div>
         
-        <footer>
-            © 2023 IRIS Tutor Academy | Empowering educators to transform learning
-        </footer>
+        <!-- Instructor Section -->
+        <div class="instructor-section">
+            <h2 class="section-title"><i class="fas fa-chalkboard-teacher"></i> Meet Your Instructor</h2>
+            <div class="instructor-header">
+                <img src="https://via.placeholder.com/80x80" alt="Instructor" class="instructor-avatar">
+                <div class="instructor-info">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p class="instructor-title">Professor of Education, Harvard University</p>
+                    <div class="instructor-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.8 (2,456 reviews)</span>
+                    </div>
+                </div>
+            </div>
+            <p class="instructor-bio">
+                Dr. Johnson has over 15 years of experience in educational psychology and tutoring methodologies. 
+                She has published numerous papers on effective learning strategies and has trained thousands of tutors worldwide. 
+                Her practical approach combines research-backed techniques with real-world classroom experience.
+            </p>
+        </div>
+        
+        <!-- Reviews Section -->
+        <div class="reviews-section">
+            <h2 class="section-title"><i class="fas fa-comments"></i> Student Reviews</h2>
+            
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">AM</div>
+                        <div class="reviewer-info">
+                            <h4>Alex Morgan</h4>
+                            <p>High School Tutor</p>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <p class="review-content">
+                    This course completely transformed my approach to tutoring. The modules on student engagement were particularly valuable. 
+                    I've already seen improvements in my students' retention and enthusiasm for learning.
+                </p>
+                <div class="review-date">Completed 2 weeks ago</div>
+            </div>
+            
+            <div class="review-item">
+                <div class="review-header">
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">TJ</div>
+                        <div class="reviewer-info">
+                            <h4>Taylor Johnson</h4>
+                            <p>College Tutor</p>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <p class="review-content">
+                    The assessment strategies module was game-changing. Dr. Johnson presents complex concepts in an accessible way. 
+                    The course is well-structured with practical exercises that you can immediately apply.
+                </p>
+                <div class="review-date">Completed 1 month ago</div>
+            </div>
+        </div>
     </div>
-
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>IRIS Learning Hub</h3>
+                <p>Empowering educators to transform learning through insight, reflection, innovation, and strategy.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Courses</h3>
+                <ul class="footer-links">
+                    <li><a href="#">All Courses</a></li>
+                    <li><a href="#">New Releases</a></li>
+                    <li><a href="#">Bestsellers</a></li>
+                    <li><a href="#">Free Courses</a></li>
+                    <li><a href="#">Certification Programs</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Tutoring Guides</a></li>
+                    <li><a href="#">Teaching Resources</a></li>
+                    <li><a href="#">Research Papers</a></li>
+                    <li><a href="#">Webinars</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Partners</a></li>
+                    <li><a href="#">For Schools</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2023 IRIS Learning Hub. All rights reserved.
+        </div>
+    </footer>
+    
     <script>
-        // Access Control
-        const correctCode = "IRIS2023"; // Your access code
-        const modal = document.getElementById('accessModal');
-        const content = document.getElementById('content');
-        const accessInput = document.getElementById('accessCode');
-        const submitBtn = document.getElementById('submitCode');
-        const errorMsg = document.getElementById('errorMsg');
-        const progressBar = document.getElementById('progressBar');
-        
-        // Show modal on load
-        window.onload = function() {
-            modal.style.display = 'flex';
-        };
-        
-        // Check access code
-        submitBtn.addEventListener('click', function() {
-            if(accessInput.value === correctCode) {
-                modal.style.display = 'none';
-                content.style.display = 'block';
-                // Store access in session
-                sessionStorage.setItem('irisAccess', 'granted');
-            } else {
-                errorMsg.style.display = 'block';
-                accessInput.value = '';
-                accessInput.focus();
-            }
+        // Toggle module content
+        document.querySelectorAll('.module-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const moduleItem = header.parentElement;
+                moduleItem.classList.toggle('active');
+                
+                // Rotate chevron icon
+                const icon = header.querySelector('i');
+                if (moduleItem.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
         });
         
-        // Check if already accessed in this session
-        if(sessionStorage.getItem('irisAccess') === 'granted') {
-            modal.style.display = 'none';
-            content.style.display = 'block';
-        }
-        
-        // Allow Enter key to submit
-        accessInput.addEventListener('keypress', function(e) {
-            if(e.key === 'Enter') {
-                submitBtn.click();
+        // Simulate course enrollment
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            if (btn.textContent.includes('Enroll Now')) {
+                btn.addEventListener('click', function() {
+                    this.textContent = 'Enrolled!';
+                    this.style.backgroundColor = 'var(--success)';
+                    setTimeout(() => {
+                        this.textContent = 'Continue';
+                    }, 1500);
+                });
             }
         });
-        
-        // Update progress bar (example - would need actual completion tracking)
-        function updateProgress() {
-            // This is just for demonstration
-            // In a real implementation, you would track module completion
-            progressBar.style.width = '25%';
-        }
-        
-        // Initialize progress
-        updateProgress();
     </script>
 </body>
 </html>
