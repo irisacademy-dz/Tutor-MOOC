@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRIS Tutor Academy</title>
+    <style>
+        :root {
+            --primary: #5D3FD3; /* Iris purple */
+            --secondary: #FFD700; /* Gold accent */
+            --light: #F8F9FA;
+            --dark: #212529;
+            --success: #28A745;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            margin: 0;
+            padding: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-weight: 300;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 300;
+        }
+        
+        .course-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .course-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .course-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-weight: 400;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        .module {
+            margin: 1.5rem 0;
+        }
+        
+        .module-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .module-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .locked {
+            opacity: 0.6;
+            position: relative;
+        }
+        
+        .locked:after {
+            content: "🔒";
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        
+        .video-container {
+            margin: 2rem 0;
+        }
+        
+        .quiz-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .quiz-btn:hover {
+            background: #4a32b0;
+        }
+        
+        .certificate-notice {
+            background: #f8f9fa;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Access modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .access-input {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .error-msg {
+            color: #dc3545;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Access Modal -->
+    <div id="accessModal" class="modal">
+        <div class="modal-content">
+            <h2>Welcome to IRIS Tutor Academy</h2>
+            <p>Please enter your access code to continue:</p>
+            <input type="password" id="accessCode" class="access-input" placeholder="Enter access code">
+            <button id="submitCode" class="submit-btn">Submit</button>
+            <p id="errorMsg" class="error-msg">Incorrect access code. Please try again.</p>
+        </div>
+    </div>
+
+    <!-- Main Content (hidden until access granted) -->
+    <div id="content" style="display:none;">
+        <header>
+            <h1>IRIS Tutor Academy</h1>
+            <p class="tagline">Elevating tutoring through insight, reflection, innovation, and strategy</p>
+        </header>
+        
+        <div class="course-container">
+            <section class="course-section">
+                <h2>Introduction</h2>
+                <p>Welcome to the IRIS Tutor Academy. This course will transform your approach to tutoring through our four foundational pillars.</p>
+                
+                <div class="video-container">
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1088956014?h=d13f8a4972&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Introduction IRIS Training course"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+                </div>
+                
+                <p>By completing this course, you'll gain the tools to create meaningful learning experiences for your students.</p>
+            </section>
+            
+            <section class="course-section">
+                <h2>Course Modules</h2>
+                
+                <div class="module">
+                    <div class="module-title">Module 1: [Title]</div>
+                    <div class="module-desc">[Brief description of Module 1 content and objectives]</div>
+                </div>
+                
+                <div class="module">
+                    <div class="module-title">Module 2: [Title]</div>
+                    <div class="module-desc">[Brief description of Module 2 content and objectives]</div>
+                </div>
+                
+                <div class="module">
+                    <div class="module-title">Module 3: [Title]</div>
+                    <div class="module-desc">[Brief description of Module 3 content and objectives]</div>
+                </div>
+                
+                <div class="module">
+                    <div class="module-title">Module 4: [Title]</div>
+                    <div class="module-desc">[Brief description of Module 4 content and objectives]</div>
+                </div>
+            </section>
+            
+            <section class="course-section">
+                <h2>Final Assessment</h2>
+                <p>Test your knowledge after completing all modules with our comprehensive quiz.</p>
+                <button class="quiz-btn locked">Take Final Quiz</button>
+                
+                <div class="certificate-notice">
+                    Upon successful completion of the quiz, you'll receive a certificate acknowledging your achievement.
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            © 2023 IRIS Tutor Academy | Empowering educators to transform learning
+        </footer>
+    </div>
+
+    <script>
+        // Access Control
+        const correctCode = "IRIS2023"; // Your access code
+        const modal = document.getElementById('accessModal');
+        const content = document.getElementById('content');
+        const accessInput = document.getElementById('accessCode');
+        const submitBtn = document.getElementById('submitCode');
+        const errorMsg = document.getElementById('errorMsg');
+        
+        // Show modal on load
+        window.onload = function() {
+            modal.style.display = 'flex';
+        };
+        
+        // Check access code
+        submitBtn.addEventListener('click', function() {
+            if(accessInput.value === correctCode) {
+                modal.style.display = 'none';
+                content.style.display = 'block';
+                // Store access in session
+                sessionStorage.setItem('irisAccess', 'granted');
+            } else {
+                errorMsg.style.display = 'block';
+                accessInput.value = '';
+            }
+        });
+        
+        // Check if already accessed in this session
+        if(sessionStorage.getItem('irisAccess') === 'granted') {
+            modal.style.display = 'none';
+            content.style.display = 'block';
+        }
+        
+        // Allow Enter key to submit
+        accessInput.addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                submitBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
